@@ -31,34 +31,34 @@ To deploy smart contracts:
 ```bash
 npx hardhat deploy --network $ChainName
 
-# example: npx hardhat deploy --network fantom
+# example: npx hardhat deploy --network ethereum
 ```
 
 Note: Don't forget to make .env file, refer .env.example file.
 
-## Android APK
+## Smart Contracts ( Mantle Testnet )
 
-[Download apk file for Android](https://drive.google.com/drive/folders/1koUt3GFjGn5jITEy1MgrMTs4LI_h77DB?usp=sharing)
+| Contract                                                                                                        | Explorer Link                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [Map.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Map.sol)                 | [0x798f13eB1B9702349372C2c01bcbbcDc2B450Dc1](https://explorer.testnet.mantle.xyz/address/0x798f13eB1B9702349372C2c01bcbbcDc2B450Dc1) |
+| [Utils.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Utils.sol)             | [0xA82f14980559567F6d3B4DFFa3531045F1eDa522](https://explorer.testnet.mantle.xyz/address/0xA82f14980559567F6d3B4DFFa3531045F1eDa522) |
+| [Faucet.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Faucet.sol)           | [0x87B90CB7C8f19f110F6920Eaa1b989bE74d97027](https://explorer.testnet.mantle.xyz/address/0x87B90CB7C8f19f110F6920Eaa1b989bE74d97027) |
+| [Marketplace.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Marketplace.sol) | [0x2dc5C39c1e93f71881e3B7bB1Ed6047adf154961](https://explorer.testnet.mantle.xyz/address/0x2dc5C39c1e93f71881e3B7bB1Ed6047adf154961) |
 
-Website can also be used which is build for webgl and will works on both desktop and mobile.
+## Smart Contracts ( Polygon Mumbai )
 
-## Smart Contracts ( Fantom Mainnet )
+| Contract                                                                                                        | Explorer Link                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| [Map.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Map.sol)                 | [0xd6df3B609A759c4cF06e6B0Bb95BE5276dB79C8D](https://mumbai.polygonscan.com/address/0xd6df3B609A759c4cF06e6B0Bb95BE5276dB79C8D) |
+| [Utils.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Utils.sol)             | [0x6D84F8C0386Bd77591EFDefb2CB40B6E141cbbA5](https://mumbai.polygonscan.com/address/0x6D84F8C0386Bd77591EFDefb2CB40B6E141cbbA5) |
+| [Faucet.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Faucet.sol)           | [0xD231246547E9e44D6108266F4ba029877EB8246c](https://mumbai.polygonscan.com/address/0xD231246547E9e44D6108266F4ba029877EB8246c) |
+| [Marketplace.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Marketplace.sol) | [0x3a86b2450D5b9b0e747bCC3D82684F8Cc61830d6](https://mumbai.polygonscan.com/address/0x3a86b2450D5b9b0e747bCC3D82684F8Cc61830d6) |
 
-| Contract                                                                                                 | Explorer Link                                                                                                        |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [Map.sol](https://github.com/Ahmed-Aghadi/BuildIt/blob/main/smart_contracts/src/Map.sol)                 | [0x91db12f3ea6f4598c982d46e8fdc72b53c333afb](https://ftmscan.com/address/0x91db12f3ea6f4598c982d46e8fdc72b53c333afb) |
-| [Utils.sol](https://github.com/Ahmed-Aghadi/BuildIt/blob/main/smart_contracts/src/Utils.sol)             | [0x4a4e6cc94507b6ad2c91ad765d3f5b566b15d895](https://ftmscan.com/address/0x4a4e6cc94507b6ad2c91ad765d3f5b566b15d895) |
-| [Faucet.sol](https://github.com/Ahmed-Aghadi/BuildIt/blob/main/smart_contracts/src/Faucet.sol)           | [0x724257edfe7f3bbf8c06a01ae3becb48dc5e220a](https://ftmscan.com/address/0x724257edfe7f3bbf8c06a01ae3becb48dc5e220a) |
-| [Marketplace.sol](https://github.com/Ahmed-Aghadi/BuildIt/blob/main/smart_contracts/src/Marketplace.sol) | [0x20294525826458177030954af848d783f733a80a](https://ftmscan.com/address/0x20294525826458177030954af848d783f733a80a) |
+## Router Protocol (Cross Chain Testing)
 
-## Axelar (Cross Chain Testing)
-
-| Chain                            | AxelarScan Link                                                                                                                                                                |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Polygon Mumbai to Fantom Testnet | [0x6a75d12c64aa8eee1e747d62ccae645d981564ce32c22166e308bcaf058decb0](https://testnet.axelarscan.io/gmp/0x6a75d12c64aa8eee1e747d62ccae645d981564ce32c22166e308bcaf058decb0:34)  |
-| Fantom Testnet to Polygon Mumbai | [0x245ffb0c9f17ef3c677f9ffb20604ec68839f7c3fbb3aa5b3b2cf5f54c8ebcad](https://testnet.axelarscan.io/gmp/0x245ffb0c9f17ef3c677f9ffb20604ec68839f7c3fbb3aa5b3b2cf5f54c8ebcad:2)   |
-| Polygon Mumbai to Fantom Testnet | [0x5e92df374722bda02cde583c6f112421f38450e1a57fd93f4fbfb0e1c166af3e](https://testnet.axelarscan.io/gmp/0x5e92df374722bda02cde583c6f112421f38450e1a57fd93f4fbfb0e1c166af3e:119) |
-| Fantom Testnet to Polygon Mumbai | [0x8591148343c3283188b7c83a9c7949091925868b2cce25c5e9db9932a74f7420](https://testnet.axelarscan.io/gmp/0x8591148343c3283188b7c83a9c7949091925868b2cce25c5e9db9932a74f7420:2)   |
+| Chain                            | RouterScan Link                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Polygon Mumbai to Mantle Testnet | [Transfer of 10 Util Tokens](https://routerscan.io/crosschain/details?srcChainId=80001&eventNonce=53968) |
 
 ## Table of Contents
 
@@ -101,6 +101,7 @@ BuildIt was built using the following technologies and tools:
 - Item Minting: Three items are minted in the Utils contract: road, house, and special item.
 - Wallet Integration: Users can connect their wallets, such as Metamask, Coinbase, and WalletConnect, to interact with the metaverse.
 - Gasless Transactions: All smart contracts implement ERC2771Context, enabling users to perform gasless transactions when the relayer is funded.
+- Cross Chain Transfer: Router Protocol was used to transfer Util Items from one chain to another.
 
 ## Challenges We Ran Into
 
