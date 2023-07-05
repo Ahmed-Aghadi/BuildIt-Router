@@ -44,6 +44,7 @@ Note: Don't forget to make .env file, refer .env.example file.
 | [Utils.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Utils.sol)             | [0xA82f14980559567F6d3B4DFFa3531045F1eDa522](https://explorer.testnet.mantle.xyz/address/0xA82f14980559567F6d3B4DFFa3531045F1eDa522) |
 | [Faucet.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Faucet.sol)           | [0x87B90CB7C8f19f110F6920Eaa1b989bE74d97027](https://explorer.testnet.mantle.xyz/address/0x87B90CB7C8f19f110F6920Eaa1b989bE74d97027) |
 | [Marketplace.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Marketplace.sol) | [0x2dc5C39c1e93f71881e3B7bB1Ed6047adf154961](https://explorer.testnet.mantle.xyz/address/0x2dc5C39c1e93f71881e3B7bB1Ed6047adf154961) |
+| [Forwarder.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Forwarder.sol)     | [0xa9D6066268E43aa2DeaFEda3655Ea7f8217945FB](https://explorer.testnet.mantle.xyz/address/0xa9D6066268E43aa2DeaFEda3655Ea7f8217945FB) |
 
 ## Smart Contracts ( Polygon Mumbai )
 
@@ -53,6 +54,7 @@ Note: Don't forget to make .env file, refer .env.example file.
 | [Utils.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Utils.sol)             | [0x6D84F8C0386Bd77591EFDefb2CB40B6E141cbbA5](https://mumbai.polygonscan.com/address/0x6D84F8C0386Bd77591EFDefb2CB40B6E141cbbA5) |
 | [Faucet.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Faucet.sol)           | [0xD231246547E9e44D6108266F4ba029877EB8246c](https://mumbai.polygonscan.com/address/0xD231246547E9e44D6108266F4ba029877EB8246c) |
 | [Marketplace.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Marketplace.sol) | [0x3a86b2450D5b9b0e747bCC3D82684F8Cc61830d6](https://mumbai.polygonscan.com/address/0x3a86b2450D5b9b0e747bCC3D82684F8Cc61830d6) |
+| [Forwarder.sol](https://github.com/Ahmed-Aghadi/BuildIt-Router/blob/main/smart_contracts/src/Forwarder.sol)     | [0xc71d86AA981B5dcE4c86f3E8285032426d6d0F74](https://mumbai.polygonscan.com/address/0xc71d86AA981B5dcE4c86f3E8285032426d6d0F74) |
 
 ## Router Protocol (Cross Chain Testing)
 
