@@ -60,8 +60,7 @@ contract MarketplaceTest is Test {
         utils = new Utils(
             utilsBaseUri,
             address(forwarder),
-            address(1),
-            address(0)
+            payable(address(0))
         );
         map = new Map(size, 5, mapBaseUri, address(utils), address(forwarder));
         marketplace = new Marketplace(

@@ -120,15 +120,15 @@ public class CanvasManager : MonoBehaviour
     {
         string sourceChain = "", destinationChain = "";
         bool success = false;
-        if (chainDropdown.options[chainDropdown.value].text == "Fantom Testnet")
+        if (chainDropdown.options[chainDropdown.value].text == "Mantle Testnet")
         {
-            sourceChain = "Polygon";
-            destinationChain = "Fantom";
+            sourceChain = "80001";
+            destinationChain = "5001";
         }
         else if (chainDropdown.options[chainDropdown.value].text == "Polygon Mumbai")
         {
-            sourceChain = "Fantom";
-            destinationChain = "Polygon";
+            sourceChain = "5001";
+            destinationChain = "80001";
         }
         if (sourceChain != "" && destinationChain != "")
         {
@@ -161,7 +161,7 @@ public class CanvasManager : MonoBehaviour
     async void ShowTransferPanel()
     {
         var chainId = await ThirdwebManager.Instance.SDK.wallet.GetChainId();
-        if (chainId != 80001 && chainId != 4002)
+        if (chainId != 80001 && chainId != 5001)
         {
             return;
         }
@@ -169,7 +169,7 @@ public class CanvasManager : MonoBehaviour
         chainDropdown.ClearOptions();
         chainDropdown.AddOptions(new List<TMP_Dropdown.OptionData>
         {
-            new TMP_Dropdown.OptionData(){text= (chainId == 80001 ? "Fantom Testnet" : "Polygon Mumbai")},
+            new TMP_Dropdown.OptionData(){text= (chainId == 80001 ? "Mantle Testnet" : "Polygon Mumbai")},
         });
     }
 

@@ -4,23 +4,24 @@ pragma solidity ^0.8.13;
 // import "solmate/tokens/ERC1155.sol";
 import {ERC1155} from "openzeppelin/token/ERC1155/ERC1155.sol";
 import "solmate/utils/LibString.sol";
+import "openzeppelin/utils/Strings.sol";
 // import "solmate/auth/Owned.sol";
 import "openzeppelin/access/Ownable.sol";
 import "openzeppelin/metatx/ERC2771Context.sol";
-import {AxelarExecutable} from "./axelar/AxelarExecutable.sol";
-import {IAxelarGasService} from "./axelar/interfaces/IAxelarGasService.sol";
+import "./routerprotocol/contracts/IDapp.sol";
+import "./routerprotocol/contracts/IGateway.sol";
 
-contract Utils is ERC2771Context, ERC1155, Ownable, AxelarExecutable {
+contract Utils is ERC2771Context, ERC1155, Ownable, IDapp {
     error CrossChainNotSupported();
     error InvalidChain();
     error InsufficientBalance();
     string public baseUri;
     uint256 public utilCount;
-    IAxelarGasService public immutable gasService;
+    IGateway public gatewayContract;
     mapping(string => string) public chains;
 
     modifier supportCrossChain() {
-        if (address(gasService) == address(0)) {
+        if (address(gatewayContract) == address(0)) {
             revert CrossChainNotSupported();
         }
         _;
@@ -29,15 +30,10 @@ contract Utils is ERC2771Context, ERC1155, Ownable, AxelarExecutable {
     constructor(
         string memory _baseUri,
         address trustedForwarder,
-        address gateway_,
-        address gasReceiver_
-    )
-        ERC2771Context(trustedForwarder)
-        ERC1155(_baseUri)
-        AxelarExecutable(gateway_)
-    {
+        address payable gatewayAddress
+    ) ERC2771Context(trustedForwarder) ERC1155(_baseUri) {
         baseUri = _baseUri;
-        gasService = IAxelarGasService(gasReceiver_);
+        gatewayContract = IGateway(gatewayAddress);
     }
 
     function setChain(
@@ -47,10 +43,19 @@ contract Utils is ERC2771Context, ERC1155, Ownable, AxelarExecutable {
         chains[chain] = addr;
     }
 
+    function setDappMetadata(string memory FeePayer) public onlyOwner {
+        gatewayContract.setDappMetadata(FeePayer);
+    }
+
+    function setGateway(address gateway) external onlyOwner {
+        gatewayContract = IGateway(gateway);
+    }
+
     function crossChainTransfer(
-        string calldata destinationChain,
+        string calldata destinationChain, // chain ID
         uint tokenId,
-        uint amount
+        uint amount,
+        bytes calldata requestMetadata
     ) public payable supportCrossChain {
         string memory destinationAddress = chains[destinationChain];
         if (bytes(destinationAddress).length == 0) {
@@ -61,35 +66,73 @@ contract Utils is ERC2771Context, ERC1155, Ownable, AxelarExecutable {
         }
         _burn(_msgSender(), tokenId, amount);
         bytes memory payload = abi.encode(tokenId, amount, _msgSender());
-        if (msg.value > 0) {
-            gasService.payNativeGasForContractCall{value: msg.value}(
-                address(this),
-                destinationChain,
-                destinationAddress,
-                payload,
-                msg.sender
-            );
-        }
-        gateway.callContract(destinationChain, destinationAddress, payload);
+
+        bytes memory requestPacket = abi.encode(destinationAddress, payload);
+
+        gatewayContract.setDappMetadata(
+            Strings.toHexString(uint256(uint160(_msgSender())), 20)
+        );
+
+        gatewayContract.iSend{value: msg.value}(
+            1,
+            0,
+            string(""),
+            destinationChain,
+            requestMetadata,
+            requestPacket
+        );
     }
 
-    function _execute(
-        string calldata sourceChain,
-        string calldata sourceAddress,
-        bytes calldata payload
-    ) internal override supportCrossChain {
+    function getRequestMetadata(
+        uint64 destGasLimit,
+        uint64 destGasPrice,
+        uint64 ackGasLimit,
+        uint64 ackGasPrice,
+        uint128 relayerFees,
+        uint8 ackType,
+        bool isReadCall,
+        bytes memory asmAddress
+    ) public pure returns (bytes memory) {
+        bytes memory requestMetadata = abi.encodePacked(
+            destGasLimit,
+            destGasPrice,
+            ackGasLimit,
+            ackGasPrice,
+            relayerFees,
+            ackType,
+            isReadCall,
+            asmAddress
+        );
+        return requestMetadata;
+    }
+
+    function iReceive(
+        string memory requestSender,
+        bytes memory packet,
+        string memory srcChainId
+    ) external override supportCrossChain returns (bytes memory) {
+        require(msg.sender == address(gatewayContract), "only gateway");
+
         if (
-            keccak256(abi.encodePacked(chains[sourceChain])) !=
-            keccak256(abi.encodePacked(sourceAddress))
+            keccak256(abi.encodePacked(chains[srcChainId])) !=
+            keccak256(abi.encodePacked(requestSender))
         ) {
             revert InvalidChain();
         }
         (uint tokenId, uint amount, address sender) = abi.decode(
-            payload,
+            packet,
             (uint, uint, address)
         );
         _mint(sender, tokenId, amount, "");
+
+        return "";
     }
+
+    function iAck(
+        uint256 requestIdentifier,
+        bool execFlag,
+        bytes memory execData
+    ) external override {}
 
     function mintMore(uint id, uint amount) public onlyOwner {
         _mint(_msgSender(), id, amount, "");

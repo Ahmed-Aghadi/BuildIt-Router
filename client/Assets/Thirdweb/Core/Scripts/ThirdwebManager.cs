@@ -158,6 +158,40 @@ public class ThirdwebManager : MonoBehaviour
         return chain;
     }
 
+    public bool IsGaslessChainId(string chainId)
+    {
+        return chainId == "80001" || chainId == "11155111" || chainId == "250";
+    }
+
+    public (string,string) GetGaslessData(string chainId)
+    {
+        string relayerUrlSepolia = "https://api.defender.openzeppelin.com/autotasks/57396929-b8bf-4078-83b4-b44c4f588809/runs/webhook/8db4ba89-3c75-4a75-9f0e-98d36b4337a3/LqU2XjBemGpVYS3CqXFCd4";
+        string forwarderAddressSepolia = "0x3EC31e8B991FF0b3FfffD480e2A5F259B51DdF5c";
+
+        string relayerUrlFantom = "https://api.defender.openzeppelin.com/autotasks/6c73d722-9ac6-4e23-b9f2-2d7217c69394/runs/webhook/8db4ba89-3c75-4a75-9f0e-98d36b4337a3/UCeui23vKEPi4b7ZG7zLLg";
+        string forwarderAddressFantom = "0x81CdC8aB270c924EBA097b8c6066b3155b2798C7";
+
+        string relayerUrlPolygonMumbai = "https://api.defender.openzeppelin.com/autotasks/0e2120aa-0b16-41ed-a533-705c54b9b475/runs/webhook/8db4ba89-3c75-4a75-9f0e-98d36b4337a3/Lwx2zEG5ydsUsyAQithMav";
+        string forwarderAddressPolygonMumbai = "0xc71d86AA981B5dcE4c86f3E8285032426d6d0F74";
+
+        string relayerUrl = relayerUrlSepolia;
+        string forwarderAddress = forwarderAddressSepolia;
+        if(chainId == "80001")
+        {
+            relayerUrl = relayerUrlPolygonMumbai;
+            forwarderAddress = forwarderAddressPolygonMumbai;
+        } else if(chainId == "250")
+        {
+            relayerUrl= relayerUrlFantom;
+            forwarderAddress = forwarderAddressFantom;
+        }else if(chainId == "11155111")
+        {
+            relayerUrl = relayerUrlSepolia;
+            forwarderAddress = forwarderAddressSepolia;
+        }
+        return (relayerUrl, forwarderAddress);
+    }
+
     public void InitializeSDKOnNetworkChange()
     {
         // Inspector chain data dictionary.
@@ -207,23 +241,17 @@ public class ThirdwebManager : MonoBehaviour
 
         Debug.Log("Gasless Toggle: " + gaslessToggle.isOn.ToString());
         Debug.Log("ChainId Check: " + currentChain.chainId);
-        if (gaslessToggle.isOn && (currentChain.chainId == "11155111" || currentChain.chainId == "250" || !string.IsNullOrEmpty(relayerUrl) && !string.IsNullOrEmpty(forwarderAddress)))
+        if (gaslessToggle.isOn && (IsGaslessChainId(currentChain.chainId) || !string.IsNullOrEmpty(relayerUrl) && !string.IsNullOrEmpty(forwarderAddress)))
         {
             Debug.Log("Found ChainId: " + currentChain.chainId);
-            string relayerUrlSepolia = "https://api.defender.openzeppelin.com/autotasks/57396929-b8bf-4078-83b4-b44c4f588809/runs/webhook/8db4ba89-3c75-4a75-9f0e-98d36b4337a3/LqU2XjBemGpVYS3CqXFCd4";
-            string forwarderAddressSepolia = "0x3EC31e8B991FF0b3FfffD480e2A5F259B51DdF5c";
 
-            string relayerUrlFantom = "https://api.defender.openzeppelin.com/autotasks/6c73d722-9ac6-4e23-b9f2-2d7217c69394/runs/webhook/8db4ba89-3c75-4a75-9f0e-98d36b4337a3/UCeui23vKEPi4b7ZG7zLLg";
-            string forwarderAddressFantom = "0x65D84C0883e0e0c9c41B044b4523cd07999924Fe";
-
-            string relayerUrl = currentChain.chainId == "11155111" ? relayerUrlSepolia : relayerUrlFantom;
-            string forwarderAddress = currentChain.chainId == "11155111" ? forwarderAddressSepolia : forwarderAddressFantom;
+            var (relayerUrl, forwarderAddress) = GetGaslessData(currentChain.chainId);
             options.gasless = new ThirdwebSDK.GaslessOptions()
             {
                 openzeppelin = new ThirdwebSDK.OZDefenderOptions()
                 {
-                    relayerUrl = currentChain.chainId == "11155111" || currentChain.chainId == "250" ? relayerUrl : this.relayerUrl,
-                    relayerForwarderAddress = currentChain.chainId == "11155111" || currentChain.chainId == "250" ? forwarderAddress : this.forwarderAddress,
+                    relayerUrl = IsGaslessChainId(currentChain.chainId) ? relayerUrl : this.relayerUrl,
+                    relayerForwarderAddress = IsGaslessChainId(currentChain.chainId) ? forwarderAddress : this.forwarderAddress,
                     domainName = string.IsNullOrEmpty(this.forwarderDomainOverride) ? "GSNv2 Forwarder" : this.forwarderDomainOverride,
                     domainVersion = string.IsNullOrEmpty(this.forwaderVersionOverride) ? "0.0.1" : this.forwaderVersionOverride
                 }

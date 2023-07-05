@@ -1,0 +1,21 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "src/routerprotocol/contracts/test/OutBoundCase.sol",
+    "id": 56984,
+    "exportedSymbols": {},
+    "nodeType": "SourceUnit",
+    "src": "2020:0:111",
+    "nodes": [],
+    "license": "MIT"
+  },
+  "id": 111
+}

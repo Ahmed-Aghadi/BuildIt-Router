@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class InputManager : MonoBehaviour
 {
 
-    public FloatingJoystick floatingJoystick;
+    public FixedJoystick fixedJoystick;
 
     public Action<Vector3Int,bool> OnMouseClick, OnMouseHold;
     public Action OnMouseUp;
@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
 		cameraMovementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		if(cameraMovementVector.magnitude == 0 )
 		{
-			cameraMovementVector = floatingJoystick.Direction;
+			cameraMovementVector = fixedJoystick.Direction;
 
         }
 	}

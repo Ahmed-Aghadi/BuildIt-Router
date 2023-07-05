@@ -1,0 +1,21 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "src/routerprotocol/contracts/test/ReEntrant.sol",
+    "id": 56985,
+    "exportedSymbols": {},
+    "nodeType": "SourceUnit",
+    "src": "2478:0:112",
+    "nodes": [],
+    "license": "MIT"
+  },
+  "id": 112
+}

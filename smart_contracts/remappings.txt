@@ -3,3 +3,4 @@ forge-std/=lib/forge-std/src/
 solmate=lib/solmate/src
 chainlink=lib/chainlink-brownie-contracts/contracts/src
 openzeppelin=lib/openzeppelin-contracts/contracts
+openzeppelin-upgradeable=lib/openzeppelin-contracts-upgradeable/contracts
