@@ -10620,7 +10620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0006048521}
+  m_AnchoredPosition: {x: 0, y: 0.00006864892}
   m_SizeDelta: {x: 0, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &624133247
@@ -21478,7 +21478,7 @@ PrefabInstance:
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db,
         type: 3}
       propertyPath: chain
-      value: mantle-testnet
+      value: mumbai
       objectReference: {fileID: 0}
     - target: {fileID: 4404896360829706404, guid: 379ed01658d62a14484f953196ff19db,
         type: 3}
@@ -30014,7 +30014,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 694807346}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999963
+  m_Size: 0.46369848
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
